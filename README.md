@@ -37,8 +37,9 @@ dbhost = '************'
 ```
  - remove "host = '192.168.1.183'," to access endpoints from the local machine or
  - update 192.168.1.183 to local machine's ip to allow access from other computers on your network
- - Start decaf by entering: sudo python decaf.py
+ 
  ```
+ ###Start decaf by entering: sudo python3 decaf.py
  Access end point by pointing your browser or a curl request to: 
  
  http://192.168.1.183:5000/BrewSettings/1 

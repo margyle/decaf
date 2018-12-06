@@ -48,11 +48,21 @@ dbhost = '************'
  etc...
  
  dont forget to change the ip to your Pi's IP, or local host if your are browsing from the pi itself.
- ```
+```
+#### Relay control formatting
+It currently requires 6 arguments:
+* pinNumber
+* relayChannel
+* timeOn
+* repeatValue
+* repeatDelay
+* connectedHardware
+
+Example:
+http://192.168.1.183:5000/relayControl/23/1/2/2/4/grinder
+
+This turns on pin 23 which is connected to relay channel 1 for 2 seconds, it repeats 2 times with a delay of 4 seconds between repeats and is connected to the grinder.
+
+
  ### Please note that this runs decaf on the Flask development server and is not meant for production!
- 
- 
-
-
- 
 

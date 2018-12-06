@@ -1,6 +1,11 @@
 # Decaf
 Decaf is the Mugsy JSON API. And at least for now, that stands for *Does Every Coffee Action, Friend*. 
 
+Current Requirements:
+ - Python 3
+ - MySQL
+ - Pip3
+
 Install(instructions in progress): 
  - sudo pip3 install Flask
  - sudo pip3 install Flask-RESTful

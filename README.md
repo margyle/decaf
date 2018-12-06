@@ -2,12 +2,15 @@
 Decaf is the Mugsy JSON API. And at least for now, that stands for *Does Every Coffee Action and Function*. 
 
 Install(instructions in progress): 
+ - sudo pip3 install Flask
+ - sudo pip3 install Flask-RESTful
+ - sudo pip3 install Flask-MySQL
  - mkdir /var/mugsy 
  - cd /var/mugsy
  - git clone https://github.com/margyle/decaf.git
+ - import db/mugsy.sql into your mysql instance
  - cd decaf
  - touch decafConfig.py 
- - import db/mugsy.sql into your mysql instance
  - Edit decafConfig.py and add:
    
 ```
@@ -30,6 +33,15 @@ dbhost = '************'
  - remove "host = '192.168.1.183'," to access endpoints from the local machine or
  - update 192.168.1.183 to local machine's ip to allow access from other computers on your network
  - Start decaf by entering: sudo python decaf.py
+ ```
+ Access end point by pointing browser to: 
+ http://192.168.1.183:5000/BrewSettings/1 
+ http://192.168.1.183:5000/CoffeeInfo/2
+ etc...
+ dont forget to change the ip to your Pi's IP, or local host if your are browsing from the pi itself.
+ ```
+ ### Please note that this runs decaf on the Flask development server and is not meant for production!
+ 
  
 
 

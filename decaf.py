@@ -1,4 +1,4 @@
-from models import BrewSettings, CoffeeInfo, barcodeScanner
+from models import BrewSettings, CoffeeInfo, barcodeScanner,relayControl
 from flask import Flask, request, jsonify, make_response
 from flask_restful import Resource, Api
 from flask.views import MethodView
@@ -32,10 +32,15 @@ class barCode(Resource):
 	def get(self):
 		return {'barcodeScanner': barcodeScanner.get(self)}
 
+class relayController(Resource):
+	def get(self, pinNumber, relayChannel, timeOn, repeatValue, connectedHardware):
+		return {'relayControl': relayControl.get(pinNumber, relayChannel, timeOn, repeatValue, connectedHardware)}
+
 
 api.add_resource(brewSettings, '/BrewSettings/<userId>')
 api.add_resource(coffeeInfo, '/CoffeeInfo/<coffeeTypeId>')
 api.add_resource(barCode, '/barcodeScanner/', methods=['GET'])
+api.add_resource(relayController, '/relayControl/<pinNumber>/<relayChannel>/<timeOn>/<repeatValue>/<connectedHardware>')
 
 
 if __name__ == "__main__":

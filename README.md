@@ -21,8 +21,16 @@ dbdb = '************'
 dbhost = '************'
 ```
 **Enter your mysql settings in place of asterisks**
+- edit following section of decaf.py
+```
+	app.run(host = '192.168.1.183', debug=True)
 
-- Start decaf by entering: sudo python decaf.py
+
+```
+ - remove "host = '192.168.1.183'," to access endpoints from the local machine or
+ - update 192.168.1.183 to local machine's ip to allow access from other computers on your network
+ - Start decaf by entering: sudo python decaf.py
+ 
 
 
  

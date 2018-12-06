@@ -1,12 +1,16 @@
 # Decaf
 Decaf is the Mugsy JSON API. And at least for now, that stands for *Does Every Coffee Action, Friend*. 
 
+## Install on Raspbian
+
 Current Requirements:
+
  - Python 3
  - MySQL
  - Pip3
 
-Install(instructions in progress): 
+Install(instructions in progress):
+
  - sudo pip3 install Flask
  - sudo pip3 install Flask-RESTful
  - sudo pip3 install Flask-MySQL
@@ -59,4 +63,12 @@ This turns on pin 23 which is connected to relay channel 1 for 2 seconds, it rep
 
 
  ### Please note that this runs decaf on the Flask development server and is not meant for production!
+
+## Run on Docker on Raspbian
+
+1. Install Git and [Docker CE](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script)
+2. `git clone https://github.com/margyle/decaf.git && cd decaf`
+3. Edit config file as above. `dbhost = 'localhost'`, `dbuser = 'root'`, `dbpass = ''`, `dbdb = 'mugsy'`
+4. `docker build -t heymugsy .`
+5. `docker run -it --rm -p 5000:5000 -v /var/lib/mysql heymugsy`
 

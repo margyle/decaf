@@ -49,7 +49,7 @@ dbhost = '************'
  
  dont forget to change the ip to your Pi's IP, or local host if your are browsing from the pi itself.
 
-#### Relay control formatting
+#### Relay control formatting:
 ```
 It currently requires 6 arguments:
 * pinNumber

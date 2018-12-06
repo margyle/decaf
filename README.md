@@ -10,6 +10,7 @@ Install(instructions in progress):
  - sudo pip3 install Flask
  - sudo pip3 install Flask-RESTful
  - sudo pip3 install Flask-MySQL
+ - sudo pip3 install simplejson
  - mkdir /var/mugsy 
  - cd /var/mugsy
  - git clone https://github.com/margyle/decaf.git

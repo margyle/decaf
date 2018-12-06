@@ -34,10 +34,12 @@ dbhost = '************'
  - update 192.168.1.183 to local machine's ip to allow access from other computers on your network
  - Start decaf by entering: sudo python decaf.py
  ```
- Access end point by pointing browser to: 
+ Access end point by pointing your browser or a curl request to: 
+ 
  http://192.168.1.183:5000/BrewSettings/1 
  http://192.168.1.183:5000/CoffeeInfo/2
  etc...
+ 
  dont forget to change the ip to your Pi's IP, or local host if your are browsing from the pi itself.
  ```
  ### Please note that this runs decaf on the Flask development server and is not meant for production!

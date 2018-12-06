@@ -7,8 +7,8 @@ Install(instructions in progress):
  - git clone https://github.com/margyle/decaf.git
  - cd decaf
  - touch decafConfig.py 
- - Edit decafConfig.py  and add:
  - import db/mugsy.sql into your mysql instance
+ - Edit decafConfig.py and add:
    
 ```
 from flaskext.mysql import MySQL  
@@ -20,6 +20,10 @@ dbpass = '************'
 dbdb = '************'
 dbhost = '************'
 ```
-**Enter your db settings in place of asterisks**
+**Enter your mysql settings in place of asterisks**
 
+- Start decaf by entering: sudo python decaf.py
+
+
+ 
 

@@ -3,6 +3,8 @@ import os
 from decafConfig import mysql
 sys.path.insert(0,'helpers')
 from barcodeHelper import scan, duringScan, afterScan
+import RPi.GPIO as GPIO
+import time
 
 
 class BrewSettings:
@@ -40,6 +42,27 @@ class barcodeScanner:
 		r = [dict((cur.description[i][0], value)
 			for i, value in enumerate(row)) for row in cur.fetchall()]
 		return {'coffeeInfo' : r}
+
+class relayControl:
+	def get(a,b,c,d,e):
+		GPIO.setmode(GPIO.BCM)
+		pinNumber = a 
+		relayChannel = b
+		timeOn = float(c)
+		repeatValue = d
+		GPIO.setup(int(pinNumber), GPIO.OUT)
+		connectedHardware = e
+		GPIO.output(int(pinNumber), GPIO.LOW)
+		time.sleep(timeOn)
+		GPIO.output(int(pinNumber), GPIO.HIGH)
+		response = [a,b,c,d,e]
+		return {'relayController' : response }
+
+
+
+
+
+
 
 
 

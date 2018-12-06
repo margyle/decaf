@@ -5,6 +5,7 @@ sys.path.insert(0,'helpers')
 from barcodeHelper import scan, duringScan, afterScan
 import RPi.GPIO as GPIO
 import time
+import itertools
 
 
 class BrewSettings:
@@ -44,18 +45,26 @@ class barcodeScanner:
 		return {'coffeeInfo' : r}
 
 class relayControl:
-	def get(a,b,c,d,e):
+	def get(a,b,c,d,e,f):
 		GPIO.setmode(GPIO.BCM)
 		pinNumber = a 
 		relayChannel = b
 		timeOn = float(c)
-		repeatValue = d
+		repeatValue = int(d)
+		repeatDelay = int(e)
+		connectedHardware = f
 		GPIO.setup(int(pinNumber), GPIO.OUT)
-		connectedHardware = e
-		GPIO.output(int(pinNumber), GPIO.LOW)
-		time.sleep(timeOn)
-		GPIO.output(int(pinNumber), GPIO.HIGH)
-		response = [a,b,c,d,e]
+		if (repeatValue > 1):
+			for _ in itertools.repeat(None, repeatValue):
+				GPIO.output(int(pinNumber), GPIO.LOW)
+				time.sleep(timeOn)
+				GPIO.output(int(pinNumber), GPIO.HIGH)
+				time.sleep(repeatDelay)
+		else:
+				GPIO.output(int(pinNumber), GPIO.LOW)
+				time.sleep(timeOn)
+				GPIO.output(int(pinNumber), GPIO.HIGH)
+		response = [a,b,c,d,e,f]
 		return {'relayController' : response }
 
 

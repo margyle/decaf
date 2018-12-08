@@ -61,6 +61,10 @@ http://192.168.1.183:5000/relayControl/23/1/2/2/4/grinder
 
 This turns on pin 23 which is connected to relay channel 1 for 2 seconds, it repeats 2 times with a delay of 4 seconds between repeats and is connected to the grinder.
 
+#### Get Pin Info By Hardware Type:
+Access pinInfo by pointing your browser or a curl request to: 
+http://192.168.1.183:5000/pinInfo/grinder
+
 
  ### Please note that this runs decaf on the Flask development server and is not meant for production!
 

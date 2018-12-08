@@ -44,6 +44,15 @@ class barcodeScanner:
 			for i, value in enumerate(row)) for row in cur.fetchall()]
 		return {'coffeeInfo' : r}
 
+class pinMappings:
+	def get(a):
+		hardwareType = a		
+		cur = mysql.connect().cursor()
+		cur.execute("select * from mugsy.pinMappings WHERE hardwareType=(%s)",hardwareType)
+		r = [dict((cur.description[i][0], value)
+			for i, value in enumerate(row)) for row in cur.fetchall()]
+		return {'pinInfo' : r }
+
 class relayControl:
 	def get(a,b,c,d,e,f):
 		GPIO.setmode(GPIO.BCM)

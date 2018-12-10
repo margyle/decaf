@@ -40,11 +40,11 @@ class pinInfo(Resource):
 	def get(self, hardwareType):
 		return {'pinMappings': pinMappings.get(hardwareType)}
 
-api.add_resource(brewSettings, '/BrewSettings/<userId>')
-api.add_resource(coffeeInfo, '/CoffeeInfo/<coffeeTypeId>')
+api.add_resource(brewSettings, '/BrewSettings/<int:userId>')
+api.add_resource(coffeeInfo, '/CoffeeInfo/<int:coffeeTypeId>')
 api.add_resource(barCode, '/barcodeScanner/', methods=['GET'])
 api.add_resource(pinInfo, '/pinInfo/<hardwareType>')
-api.add_resource(relayController, '/relayControl/<pinNumber>/<relayChannel>/<timeOn>/<repeatValue>/<repeatDelay>/<connectedHardware>')
+api.add_resource(relayController, '/relayControl/<int:pinNumber>/<int:relayChannel>/<float:timeOn>/<int:repeatValue>/<int:repeatDelay>/<string:connectedHardware>')
 
 
 if __name__ == "__main__":

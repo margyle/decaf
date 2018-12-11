@@ -73,6 +73,7 @@ class relayControl:
 				GPIO.output(int(pinNumber), GPIO.LOW)
 				time.sleep(timeOn)
 				GPIO.output(int(pinNumber), GPIO.HIGH)
+		GPIO.cleanup()
 		response = [a,b,c,d,e,f]
 		return {'relayController' : response }
 

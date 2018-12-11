@@ -44,7 +44,7 @@ api.add_resource(brewSettings, '/BrewSettings/<int:userId>')
 api.add_resource(coffeeInfo, '/CoffeeInfo/<int:coffeeTypeId>')
 api.add_resource(barCode, '/barcodeScanner/', methods=['GET'])
 api.add_resource(pinInfo, '/pinInfo/<hardwareType>')
-api.add_resource(relayController, '/relayControl/<int:pinNumber>/<int:relayChannel>/<float:timeOn>/<int:repeatValue>/<int:repeatDelay>/<string:connectedHardware>')
+api.add_resource(relayController, '/relayControl/<int:pinNumber>/<int:relayChannel>/<timeOn>/<int:repeatValue>/<int:repeatDelay>/<string:connectedHardware>')
 
 
 if __name__ == "__main__":

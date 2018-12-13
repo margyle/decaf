@@ -79,14 +79,16 @@ class RelayControl:
 			GPIO.output(pinNumber, GPIO.HIGH)
 		GPIO.cleanup()
 		
-		return {'relayController' : [
-			pinNumber, 
-			relayChannel, 
-			timeOn, 
-			repeatValue, 
-			repeatDelay, 
-			connectedHardware,
-		]}
+		response = {
+			'pinNumber': pinNumber, 
+			'relayChannel': relayChannel, 
+			'timeOn': timeOn, 
+			'repeatValue': repeatValue, 
+			'repeatDelay': repeatDelay, 
+			'connectedHardware': connectedHardware,
+		}
+
+		return {'relayController' : response}
 
 
 

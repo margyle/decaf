@@ -1,5 +1,5 @@
-Flask==1.0.2
-Flask-MySQL==1.4.0
-Flask-RESTful==0.3.6
+Flask_RESTful==0.3.6
 simplejson==3.16.0
+Flask==1.0.2
+Flask_Bcrypt==0.7.1
 RPi.GPIO==0.6.5

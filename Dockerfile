@@ -8,11 +8,11 @@ RUN pip3 install virtualenv
 
 RUN virtualenv decaf
 
-RUN /decaf/bin/pip3 install -r requirements.txt
-
-COPY ./ /var/mugsy/decaf
+COPY . /var/mugsy/decaf
 
 WORKDIR /var/mugsy/decaf
+
+RUN /decaf/bin/pip3 install -r requirements.txt
 
 ENTRYPOINT /etc/init.d/mysql start && \
            mysql < db/mugsy.sql && \

@@ -8,13 +8,11 @@ Current Requirements:
  - Python 3
  - MySQL
  - Pip3
+ - VirtualEnv
 
 Install(instructions in progress):
 
- - sudo pip3 install Flask
- - sudo pip3 install Flask-RESTful
- - sudo pip3 install Flask-MySQL
- - sudo pip3 install simplejson
+ - sudo pip3 install -r requirements.txt
  - mkdir /var/mugsy 
  - cd /var/mugsy
  - git clone https://github.com/margyle/decaf.git

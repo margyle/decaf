@@ -10,9 +10,9 @@ RUN virtualenv decaf
 
 RUN /decaf/bin/pip3 install Flask Flask-RESTful Flask-MySQL simplejson RPi.GPIO
 
-COPY ./ /var/www/decaf
+COPY ./ /var/mugsy/decaf
 
-WORKDIR /var/www/decaf
+WORKDIR /var/mugsy/decaf
 
 ENTRYPOINT /etc/init.d/mysql start && \
            mysql < db/mugsy.sql && \

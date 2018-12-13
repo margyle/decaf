@@ -8,7 +8,7 @@ RUN pip3 install virtualenv
 
 RUN virtualenv decaf
 
-RUN /decaf/bin/pip3 install Flask Flask-RESTful Flask-MySQL simplejson RPi.GPIO
+RUN /decaf/bin/pip3 install -r requirements.txt
 
 COPY ./ /var/www/decaf
 

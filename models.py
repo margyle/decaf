@@ -59,33 +59,33 @@ class PinMappings:
 
 class RelayControl:
 	@staticmethod
-	def get(pinNumber, relayChannel, timeOn, repeatValue, repeatDelay, connectedHardware):
-		GPIO.setmode(GPIO.BCM)
-		pinNumber = int(pinNumber)
+	def get(pin, channel, timeOn, repeat, repeatDelay, hardware):
+		pin = int(pin)
 		timeOn = float(timeOn)
-		repeatValue = int(repeatValue)
-		repeatDelay = int(repeatDelay)
+		repeat = int(repeat)
+		repeatDelay = float(repeatDelay)
 
-		GPIO.setup(pinNumber, GPIO.OUT)
-		if (repeatValue > 1):
-			for _ in itertools.repeat(None, repeatValue):
-				GPIO.output(pinNumber, GPIO.LOW)
+		GPIO.setmode(GPIO.BCM)
+		GPIO.setup(pin, GPIO.OUT)
+		if (repeat > 1):
+			for _ in itertools.repeat(None, repeat):
+				GPIO.output(pin, GPIO.LOW)
 				time.sleep(timeOn)
-				GPIO.output(pinNumber, GPIO.HIGH)
+				GPIO.output(pin, GPIO.HIGH)
 				time.sleep(repeatDelay)
 		else:
-			GPIO.output(pinNumber, GPIO.LOW)
+			GPIO.output(pin, GPIO.LOW)
 			time.sleep(timeOn)
-			GPIO.output(pinNumber, GPIO.HIGH)
+			GPIO.output(pin, GPIO.HIGH)
 		GPIO.cleanup()
 		
 		response = {
-			'pinNumber': pinNumber, 
-			'relayChannel': relayChannel, 
+			'pin': pin, 
+			'channel': channel, 
 			'timeOn': timeOn, 
-			'repeatValue': repeatValue, 
+			'repeat': repeat, 
 			'repeatDelay': repeatDelay, 
-			'connectedHardware': connectedHardware,
+			'hardware': hardware,
 		}
 
 		return {'relayController' : response}

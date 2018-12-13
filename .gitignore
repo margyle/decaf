@@ -41,3 +41,4 @@ venv.bak/
 
 .vscode
 decaf/
+.DS_Store

@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify, make_response
-from flask_restful import Resource, Api
+from flask import Flask, request, jsonify, make_response, abort
+from flask_restful import Resource, Api, reqparse
 from flask.views import MethodView
 from flaskext.mysql import MySQL
 import simplejson as json
@@ -16,7 +16,6 @@ app.config['MYSQL_DATABASE_HOST'] = dbhost
 
 mysql.init_app(app)
 
-
 #query brew settings by user id
 class BrewSettings(Resource):
 	def get(self, userId):
@@ -29,12 +28,27 @@ class CoffeeInfo(Resource):
 
 #get coffee info by using the barcode scanner
 class BarCode(Resource):
-	def get(self):
+	def post(self):
 		return {'barcodeScanner': models.BarcodeScanner.get()}
 
 class RelayController(Resource):
-	def get(self, pinNumber, relayChannel, timeOn, repeatValue, repeatDelay, connectedHardware):
-		return {'relayControl': models.RelayControl.get(pinNumber, relayChannel, timeOn, repeatValue, repeatDelay, connectedHardware)}
+	def post(self, hardware):
+		req = request.get_json(force=True)
+		if req is None:
+			return abort(400)
+		try:
+			return {
+				'relayControl': models.RelayControl.get(
+					req['pin'], 
+					req['channel'], 
+					req['timeOn'], 
+					req['repeat'], 
+					req['repeatDelay'], 
+					hardware
+				)
+			}
+		except KeyError:
+			return abort(400)
 
 class PinInfo(Resource):
 	def get(self, hardwareType):
@@ -44,7 +58,7 @@ api.add_resource(BrewSettings, '/brewSettings/<int:userId>')
 api.add_resource(CoffeeInfo, '/coffeeInfo/<int:coffeeTypeId>')
 api.add_resource(BarCode, '/barcodeScanner')
 api.add_resource(PinInfo, '/pinInfo/<hardwareType>')
-api.add_resource(RelayController, '/relayControl/<int:pinNumber>/<int:relayChannel>/<timeOn>/<int:repeatValue>/<int:repeatDelay>/<string:connectedHardware>')
+api.add_resource(RelayController, '/relayControl/<hardware>')
 
 if __name__ == "__main__":
   #remove in production

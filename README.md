@@ -58,7 +58,7 @@ Example:
 POST http://192.168.1.183:5000/relayControl/grinder HTTP/1.1
 Content-Type: application/json
 
-{"pin":"23","channel":"1","timeOn":"1.0","repeat":"3","repeatDelay":"2.0"}
+{"pin":23,"channel":1,"timeOn":1.0,"repeat":3,"repeatDelay":2.0}
 ```
 This turns on pin 23 which is connected to relay channel 1 for 2 seconds, it repeats 2 times with a delay of 4 seconds between repeats and is connected to the grinder.
 

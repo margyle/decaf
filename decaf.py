@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, make_response, abort
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Resource, Api
 from flask.views import MethodView
 from flaskext.mysql import MySQL
 import simplejson as json

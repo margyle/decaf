@@ -1,81 +1,92 @@
 import sys
 import os
-from decafConfig import mysql
-sys.path.insert(0,'helpers')
-from barcodeHelper import scan, duringScan, afterScan
-import RPi.GPIO as GPIO
 import time
 import itertools
 
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    import helpers.gpio_mock as GPIO
+
+from decafConfig import mysql
+from helpers import barcode
 
 class BrewSettings:
-	def get(a):
-		user = a		
+	@staticmethod
+	def get(user):
 		cur = mysql.connect().cursor()
-		cur.execute("select * from mugsy.brewSettings WHERE userID=(%s)",user)
+		cur.execute("SELECT * FROM mugsy.brewSettings WHERE userID=(%s)",user)
 		r = [dict((cur.description[i][0], value)
 			for i, value in enumerate(row)) for row in cur.fetchall()]
 		return {'brewSettings' : r}
 
 class CoffeeInfo:
-	def get(a):
-		coffeeTypeId = a		
+	@staticmethod
+	def get(coffeeTypeId):
 		cur = mysql.connect().cursor()
-		cur.execute("select * from mugsy.coffeeTypes WHERE coffeeTypeId=(%s)",coffeeTypeId)
+		cur.execute("SELECT * FROM mugsy.coffeeTypes WHERE coffeeTypeId=(%s)", coffeeTypeId)
 		r = [dict((cur.description[i][0], value)
 			for i, value in enumerate(row)) for row in cur.fetchall()]
 		return {'brewSettings' : r}
 
-class barcodeScanner:
-	def get(self):
+class BarcodeScanner:
+	@staticmethod
+	def get():
 		count = 1
 		while(count < 12):
-			contents = scan()
+			contents = barcode.scan()
 			count = len(contents)
-			duringScan()
+			barcode.duringScan()
 		else:  
 			for line in open("/var/mugsy/decaf/helpers/upc.txt"):
 				last=line
-				barcode = [last.rstrip('\n')]
-				afterScan()
+				upc = [last.rstrip('\n')]
+				barcode.afterScan()
 		cur = mysql.connect().cursor()
-		cur.execute("select * from mugsy.coffeeTypes WHERE upc=(%s)",barcode)
+		cur.execute("SELECT * FROM mugsy.coffeeTypes WHERE upc=(%s)", upc)
 		r = [dict((cur.description[i][0], value)
 			for i, value in enumerate(row)) for row in cur.fetchall()]
 		return {'coffeeInfo' : r}
 
-class pinMappings:
-	def get(a):
-		hardwareType = a		
+class PinMappings:
+	@staticmethod
+	def get(hardwareType):
 		cur = mysql.connect().cursor()
-		cur.execute("select * from mugsy.pinMappings WHERE hardwareType=(%s)",hardwareType)
+		cur.execute("SELECT * FROM mugsy.pinMappings WHERE hardwareType=(%s)",hardwareType)
 		r = [dict((cur.description[i][0], value)
 			for i, value in enumerate(row)) for row in cur.fetchall()]
 		return {'pinInfo' : r }
 
-class relayControl:
-	def get(a,b,c,d,e,f):
+class RelayControl:
+	@staticmethod
+	def get(pinNumber, relayChannel, timeOn, repeatValue, repeatDelay, connectedHardware):
 		GPIO.setmode(GPIO.BCM)
-		pinNumber = a 
-		relayChannel = b
-		timeOn = float(c)
-		repeatValue = int(d)
-		repeatDelay = int(e)
-		connectedHardware = f
-		GPIO.setup(int(pinNumber), GPIO.OUT)
+		pinNumber = int(pinNumber)
+		timeOn = float(timeOn)
+		repeatValue = int(repeatValue)
+		repeatDelay = int(repeatDelay)
+
+		GPIO.setup(pinNumber, GPIO.OUT)
 		if (repeatValue > 1):
 			for _ in itertools.repeat(None, repeatValue):
-				GPIO.output(int(pinNumber), GPIO.LOW)
+				GPIO.output(pinNumber, GPIO.LOW)
 				time.sleep(timeOn)
-				GPIO.output(int(pinNumber), GPIO.HIGH)
+				GPIO.output(pinNumber, GPIO.HIGH)
 				time.sleep(repeatDelay)
 		else:
-				GPIO.output(int(pinNumber), GPIO.LOW)
-				time.sleep(timeOn)
-				GPIO.output(int(pinNumber), GPIO.HIGH)
+			GPIO.output(pinNumber, GPIO.LOW)
+			time.sleep(timeOn)
+			GPIO.output(pinNumber, GPIO.HIGH)
 		GPIO.cleanup()
-		response = [a,b,c,d,e,f]
-		return {'relayController' : response }
+		
+		return {'relayController' : [
+			pinNumber, 
+			relayChannel, 
+			timeOn, 
+			repeatValue, 
+			repeatDelay, 
+			connectedHardware,
+		]}
 
 
 

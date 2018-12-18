@@ -44,19 +44,22 @@ dbhost = '************'
  
  dont forget to change the ip to your Pi's IP, or local host if your are browsing from the pi itself.
 
-#### Relay control formatting:
+#### Relay control formatting
 
-It currently requires 6 arguments:
-* pinNumber
-* relayChannel
-* timeOn
-* repeatValue
-* repeatDelay
-* connectedHardware
+It currently requires 5 arguments:
+* `pin` (int) GPIO Pin Number
+* `channel` (int) Relay Channel
+* `timeOn` (float) Total running time
+* `repeat` (int) Number of times to repeat
+* `repeatDelay` (float) Delay between repeat times
 
 Example:
-http://192.168.1.183:5000/relayControl/23/1/2/2/4/grinder
+```
+POST http://192.168.1.183:5000/relayControl/grinder HTTP/1.1
+Content-Type: application/json
 
+{"pin":23,"channel":1,"timeOn":1.0,"repeat":3,"repeatDelay":2.0}
+```
 This turns on pin 23 which is connected to relay channel 1 for 2 seconds, it repeats 2 times with a delay of 4 seconds between repeats and is connected to the grinder.
 
 #### Get Pin Info By Hardware Type:
@@ -64,7 +67,7 @@ Access pinInfo by pointing your browser or a curl request to:
 http://192.168.1.183:5000/pinInfo/grinder
 
 
- ### Please note that this runs decaf on the Flask development server and is not meant for production!
+### Please note that this runs decaf on the Flask development server and is not meant for production!
 
 ## Run on Docker on Raspbian
 
@@ -73,4 +76,3 @@ http://192.168.1.183:5000/pinInfo/grinder
 3. Edit config file as above. `dbhost = 'localhost'`, `dbuser = 'root'`, `dbpass = ''`, `dbdb = 'mugsy'`
 4. `docker build -t heymugsy .`
 5. `docker run -it --rm --privileged -p 5000:5000 -v /var/lib/mysql heymugsy`
-

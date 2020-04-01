@@ -40,7 +40,7 @@ def _init_db():
         conn = sqlite3.connect(f"db/{_DATABASE}.db")
         with open(f"db/schema.sql", "r") as f:
             conn.executescript(f.read())
-        print(sqlite3.version)
+        print("Created sqlite database and schema.")
     except sqlite3.Error as e:
         print(e)
     finally:

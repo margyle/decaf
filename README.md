@@ -9,17 +9,16 @@ Current Requirements:
  - Pip3
  - VirtualEnv
 
-Install(instructions in progress):
+Install on Raspberry Pi:
+(instructions in progress)
 
  - sudo pip3 install -r requirements.txt
  - mkdir /var/mugsy 
  - cd /var/mugsy
  - git clone https://github.com/margyle/decaf.git
- - import db/mugsy.sql into your mysql instance
  - cd decaf
- - touch decafConfig.py 
- - Edit decafConfig.py and add:
-   
+ - run `python3 -m db` for creating sqlite db
+
 
 ### Start decaf by entering: sudo python3 decaf.py
 

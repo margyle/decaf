@@ -1,76 +1,76 @@
 -- TABLE
 CREATE TABLE IF NOT EXISTS `brewSettings` (
-  `brewSettingsId` int(255) PRIMARY KEY,
-  `grindSize` int(255) NOT NULL,
-  `waterTemp` int(255) NOT NULL,
-  `bloomTime` int(255) NOT NULL,
-  `pumpTimingOn` int(255) NOT NULL,
-  `pumpTimingOff` int(255) NOT NULL,
-  `pourOverPatternId` int(255) NOT NULL,
-  `grinderTime` int(255) NOT NULL,
-  `tempHolder` int(255) NOT NULL,
-  `userId` int(255) NOT NULL
+  `brewSettingsId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `grindSize` INTEGER NOT NULL,
+  `waterTemp` INTEGER NOT NULL,
+  `bloomTime` INTEGER NOT NULL,
+  `pumpTimingOn` INTEGER NOT NULL,
+  `pumpTimingOff` INTEGER NOT NULL,
+  `pourOverPatternId` INTEGER NOT NULL,
+  `grinderTime` INTEGER NOT NULL,
+  `tempHolder` INTEGER NOT NULL,
+  `userId` INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `coffeeTypes` (
-  `coffeeTypeId` int(255) PRIMARY KEY,
-  `name` varchar(255) NOT NULL,
-  `varietyId` int(255) NOT NULL,
-  `originId` int(255) NOT NULL,
-  `origin` varchar(255) DEFAULT NULL,
-  `variety` varchar(255) DEFAULT NULL,
-  `upc` varchar(255) NOT NULL,
-  `price` float(10,2) NOT NULL,
-  `weight` float(10,2) NOT NULL,
-  `companyName` varchar(255) NOT NULL
+  `coffeeTypeId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `name` TEXT NOT NULL,
+  `varietyId` INTEGER NOT NULL,
+  `originId` INTEGER NOT NULL,
+  `origin` TEXT DEFAULT NULL,
+  `variety` TEXT DEFAULT NULL,
+  `upc` TEXT NOT NULL,
+  `price` REAL NOT NULL,
+  `weight` REAL NOT NULL,
+  `companyName` TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `favorites` (
-  `favoriteId` int(255) PRIMARY KEY,
-  `userId` int(255) NOT NULL,
-  `favoriteType` varchar(255) NOT NULL,
-  `brewSettingId` int(255) NOT NULL,
-  `CoffeeTypeId` int(255) NOT NULL
+  `favoriteId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `userId` INTEGER NOT NULL,
+  `favoriteType` TEXT NOT NULL,
+  `brewSettingId` INTEGER NOT NULL,
+  `CoffeeTypeId` INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `friends` (
-  `friendshipId` int(255) PRIMARY KEY,
-  `userId` int(255) NOT NULL,
-  `friendUserId` int(255) NOT NULL
+  `friendshipId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `userId` INTEGER NOT NULL,
+  `friendUserId` INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `hardwareTypes` (
-  `hardwareTypeID` int(255) PRIMARY KEY,
-  `hardwareType` varchar(255) NOT NULL,
-  `voltage` varchar(255) NOT NULL,
-  `amps` varchar(255) NOT NULL
+  `hardwareTypeID` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `hardwareType` TEXT NOT NULL,
+  `voltage` TEXT NOT NULL,
+  `amps` TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `integrations` (
-  `integrationId` int(255) PRIMARY KEY,
-  `integrationName` varchar(255) NOT NULL,
-  `apiType` varchar(255) NOT NULL,
-  `authenticationKey` varchar(255) NOT NULL,
-  `userId` int(255) NOT NULL
+  `integrationId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `integrationName` TEXT NOT NULL,
+  `apiType` TEXT NOT NULL,
+  `authenticationKey` TEXT NOT NULL,
+  `userId` INTEGER NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `pinMappings` (
-  `pinMappingId` int(255) PRIMARY KEY,
-  `relayChannel` int(255) NOT NULL,
-  `hardwareTypeId` int(255) NOT NULL,
+  `pinMappingId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `relayChannel` INTEGER NOT NULL,
+  `hardwareTypeId` INTEGER NOT NULL,
   `pinNumber` int(10) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `pourOverPatterns` (
-  `pourOverPatternId` int(255) PRIMARY KEY,
-  `pourOverPattern` varchar(255) NOT NULL
+  `pourOverPatternId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `pourOverPattern` TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `profile` (
-  `profileId` int(255) PRIMARY KEY,
-  `userId` int(255) NOT NULL,
-  `profileType` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `profileId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `userId` INTEGER NOT NULL,
+  `profileType` TEXT NOT NULL,
+  `email` TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `userLevels` (
-  `userLevelId` int(255) PRIMARY KEY,
-  `userLevelType` varchar(255) NOT NULL
+  `userLevelId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `userLevelType` TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS `users` (
-  `userId` int(255) PRIMARY KEY,
-  `userName` varchar(255) NOT NULL,
-  `userLevel` int(255) NOT NULL
+  `userId` INTEGER PRIMARY KEY AUTOINCREMENT,
+  `userName` TEXT NOT NULL,
+  `userLevel` INTEGER NOT NULL
 );
 

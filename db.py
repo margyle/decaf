@@ -56,8 +56,12 @@ def _init_db():
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Create and bootstrap database.')
-    parser.add_argument("--bootstrap", action="store_true", help="Bootstrap data provided in bootstrap.sql")
+    parser = argparse.ArgumentParser(description="Create and bootstrap database.")
+    parser.add_argument(
+        "--bootstrap",
+        action="store_true",
+        help="Bootstrap data provided in bootstrap.sql",
+    )
     args = parser.parse_args()
 
     _init_db()

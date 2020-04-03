@@ -65,7 +65,11 @@ class PinMappings:
     def get(hardwareType):
         cur = get_db().cursor()
         cur.execute(
-            "SELECT * FROM pinMappings WHERE hardwareType=?", (hardwareType,)
+            "SELECT pinMappingId, relayChannel, j.hardwareTypeId, "
+            "pinNumber FROM (hardwareTypes INNER JOIN pinMappings ON "
+            "(hardwareTypes.hardwareTypeID = pinMappings.hardwareTypeId))"
+            " AS j WHERE hardwareType=?",
+            (hardwareType,),
         )
         r = [
             dict((cur.description[i][0], value) for i, value in enumerate(row))

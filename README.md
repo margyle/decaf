@@ -5,9 +5,8 @@ Decaf is the Mugsy JSON API. And at least for now, that stands for *Does Every C
 
 Current Requirements:
 
- - Python 3
- - Pip3
- - VirtualEnv
+ - python 3
+ - pip
 
 Install on Raspberry Pi:
 (instructions in progress)
@@ -60,4 +59,4 @@ http://192.168.1.183:5000/pinInfo/grinder
 1. Install Git and [Docker CE](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-convenience-script)
 2. `git clone https://github.com/margyle/decaf.git && cd decaf`
 3. `docker build -t heymugsy .`
-4. `docker run -it --rm --privileged -p 5000:5000 -v /var/lib/mysql heymugsy`
+4. `docker run -p 5000:5000 heymugsy`

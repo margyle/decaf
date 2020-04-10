@@ -20,17 +20,18 @@ I2C = 42
 HARD_PWM = 43
 
 RPI_INFO = {
-    'MANUFACTURER': 'Mock',
-    'P1_REVISION': 0,
-    'PROCESSOR': 'FAKE1234',
-    'RAM': '1024M',
-    'REVISION': 'z99999',
-    'TYPE': 'Model Mock',
-    'TESTING_INFO': 'This is only a Mock.'
+    "MANUFACTURER": "Mock",
+    "P1_REVISION": 0,
+    "PROCESSOR": "FAKE1234",
+    "RAM": "1024M",
+    "REVISION": "z99999",
+    "TYPE": "Model Mock",
+    "TESTING_INFO": "This is only a Mock.",
 }
 RPI_VERSION = 3
 IS_MOCK = 1
 VERSION = "0.6.5"
+
 
 class State(object):
     pass
@@ -91,8 +92,8 @@ def gpio_function(*args, **kwargs):
 def add_event_callback(*args, **kwargs):
     pass
 
-def PWM(*args, **kwargs):
 
+def PWM(*args, **kwargs):
     class PWMObject(object):
         def __init__(self, *args, **kwargs):
             pass

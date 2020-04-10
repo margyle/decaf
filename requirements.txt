@@ -1,6 +1,5 @@
 Flask==1.0.2
 Flask_RESTful==0.3.6
 Flask_Bcrypt==0.7.1
-Flask-MySQL==1.4.0
 simplejson==3.16.0
 RPi.GPIO==0.6.5

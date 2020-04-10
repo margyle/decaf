@@ -24,7 +24,9 @@ Install on Raspberry Pi:
  Access end point by pointing your browser or a curl request to: 
  
  http://192.168.1.183:5000/brewSettings/1 
+ 
  http://192.168.1.183:5000/coffeeInfo/2
+ 
  etc...
  
  dont forget to change the ip to your Pi's IP, or local host if your are browsing from the pi itself.

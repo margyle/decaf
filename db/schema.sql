@@ -1,3 +1,8 @@
+CREATE TABLE IF NOT EXISTS pourOverPatterns (
+  pourOverPatternId INTEGER PRIMARY KEY AUTOINCREMENT,
+  pourOverPattern TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS brewSettings (
   brewSettingsId INTEGER PRIMARY KEY AUTOINCREMENT,
   grindSize INTEGER NOT NULL,
@@ -8,7 +13,8 @@ CREATE TABLE IF NOT EXISTS brewSettings (
   pourOverPatternId INTEGER NOT NULL,
   grinderTime INTEGER NOT NULL,
   tempHolder INTEGER NOT NULL,
-  userId INTEGER NOT NULL
+  userId INTEGER NOT NULL,
+  FOREIGN KEY(pourOverPatternId) REFERENCES pourOverPatterns(pourOverPatternId)
 );
 
 CREATE TABLE IF NOT EXISTS coffeeTypes (
@@ -24,18 +30,42 @@ CREATE TABLE IF NOT EXISTS coffeeTypes (
   companyName TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS userLevels (
+  userLevelId INTEGER PRIMARY KEY AUTOINCREMENT,
+  userLevelType TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS users (
+  userId INTEGER PRIMARY KEY AUTOINCREMENT,
+  userName TEXT NOT NULL,
+  userLevel INTEGER NOT NULL,
+  FOREIGN KEY (userLevel) REFERENCES userLevels(userLevelId)
+);
+
+CREATE TABLE IF NOT EXISTS profile (
+  profileId INTEGER PRIMARY KEY AUTOINCREMENT,
+  userId INTEGER NOT NULL,
+  profileType TEXT NOT NULL,
+  email TEXT NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(userId)
+);
+
 CREATE TABLE IF NOT EXISTS favorites (
   favoriteId INTEGER PRIMARY KEY AUTOINCREMENT,
   userId INTEGER NOT NULL,
   favoriteType TEXT NOT NULL,
   brewSettingId INTEGER NOT NULL,
-  CoffeeTypeId INTEGER NOT NULL
+  coffeeTypeId INTEGER NOT NULL,
+  FOREIGN KEY (userId) REFERENCES profile(userId),
+  FOREIGN KEY (brewSettingId) REFERENCES brewSettings(brewSettingsId),
+  FOREIGN KEY (coffeeTypeId) REFERENCES coffeeTypes(coffeeTypeId)
 );
 
 CREATE TABLE IF NOT EXISTS friends (
   friendshipId INTEGER PRIMARY KEY AUTOINCREMENT,
   userId INTEGER NOT NULL,
-  friendUserId INTEGER NOT NULL
+  friendUserId INTEGER NOT NULL,
+  FOREIGN KEY(friendUserId) REFERENCES profile(userId)
 );
 
 CREATE TABLE IF NOT EXISTS hardwareTypes (
@@ -50,36 +80,19 @@ CREATE TABLE IF NOT EXISTS integrations (
   integrationName TEXT NOT NULL,
   apiType TEXT NOT NULL,
   authenticationKey TEXT NOT NULL,
-  userId INTEGER NOT NULL
+  userId INTEGER NOT NULL,
+  FOREIGN KEY (userId) REFERENCES profile(userId)
 );
 
 CREATE TABLE IF NOT EXISTS pinMappings (
   pinMappingId INTEGER PRIMARY KEY AUTOINCREMENT,
   relayChannel INTEGER NOT NULL,
   hardwareTypeId INTEGER NOT NULL,
-  pinNumber INTEGER NOT NULL
+  pinNumber INTEGER NOT NULL,
+  FOREIGN KEY (hardwareTypeID) REFERENCES hardwareTypes(hardwareTypeId)
 );
 
-CREATE TABLE IF NOT EXISTS pourOverPatterns (
-  pourOverPatternId INTEGER PRIMARY KEY AUTOINCREMENT,
-  pourOverPattern TEXT NOT NULL
-);
 
-CREATE TABLE IF NOT EXISTS profile (
-  profileId INTEGER PRIMARY KEY AUTOINCREMENT,
-  userId INTEGER NOT NULL,
-  profileType TEXT NOT NULL,
-  email TEXT NOT NULL
-);
 
-CREATE TABLE IF NOT EXISTS userLevels (
-  userLevelId INTEGER PRIMARY KEY AUTOINCREMENT,
-  userLevelType TEXT NOT NULL
-);
 
-CREATE TABLE IF NOT EXISTS users (
-  userId INTEGER PRIMARY KEY AUTOINCREMENT,
-  userName TEXT NOT NULL,
-  userLevel INTEGER NOT NULL
-);
 
